@@ -16,12 +16,10 @@ curl http://www.hdfgroup.org/ftp/HDF5/current/src/hdf5-1.8.12.tar.gz -o hdf5-1.8
 tar -xzf hdf5-1.8.12.tar.gz
 rm hdf5-1.8.12.tar.gz
 ```
-
 2. Create a build directory
 ``` bash
 mkdir build-hdf5 && cd build-hdf5
 ```
-
 3. Build and install the library. Select an installation location using
    `--prefix=LOCATION`.
 ``` bash
@@ -29,7 +27,6 @@ mkdir build-hdf5 && cd build-hdf5
 make all
 sudo make install
 ```
-
 4. Cleanup
 ``` bash
 cd ..
@@ -48,12 +45,10 @@ curl https://codeload.github.com/Unidata/netcdf-c/tar.gz/v4.3.1.1 -o netcdf-c-4.
 tar -xzf netcdf-c-4.3.1.1.tar.gz
 rm netcdf-c-4.3.1.1.tar.gz
 ```
-
 2. Create a build directory
 ``` bash
 mkdir build-netcdf && cd build-netcdf
 ```
-
 3. Build and install the library. `/usr/local` should be replaced with the
    installation location of the HDF5 library.
 ``` bash
@@ -61,7 +56,6 @@ CPPFLAGS=-I/usr/local/include LDFLAGS=-L/usr/local/lib ../netcdf-c-4.3.1.1/confi
 make all
 sudo make install
 ```
-
 4. Cleanup
 ``` bash
 cd ..
@@ -77,7 +71,6 @@ The PyPA recommended tool for installing Python packages.
 ``` bash
 curl https://raw.github.com/pypa/pip/master/contrib/get-pip.py -o get-pip.py
 ```
-
 2. Install pip
 ``` bash
 sudo python get-pip.py
