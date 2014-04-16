@@ -1,4 +1,4 @@
-# sample-data-generator
+# sample\_data\_generator
 
 Generates sample randomised data which can later be used for correctness
 checking.
