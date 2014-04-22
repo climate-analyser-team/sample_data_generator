@@ -22,7 +22,31 @@
 # If not, see <http://www.gnu.org/licenses/>.
 #
 
+from datetime import date
+from datetime import timedelta
+from calendar import monthrange
+
+# Adds the specified number of months to the given date and returns as a tuple.
+def addMonths(start, months):
+    result = divmod((start[1] - 1) + months, 12)
+    year = start[0] + result[0]
+    month = result[1] + 1
+
+    range = monthrange(year, month)
+    day = min(start[2], range[1])
+
+    return year, month, day
+
 # start should be a tuple in the format (year, month, day)
 # months should be the number of months
 def monthlist(start, months):
-    return []
+    first = date(start[0], start[1], start[2])
+
+    output = []
+    for i in range (0, months):
+        next = addMonths(start, i)
+        current = date(next[0], next[1], next[2])
+        delta = current - first
+        output.append(delta.days)
+
+    return output
