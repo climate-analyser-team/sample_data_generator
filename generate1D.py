@@ -1,7 +1,7 @@
 #
 # One-dimensional netCDF sample file generator
 # Author:        Andrew Dunn
-# Last modified: 22 Apr 2014
+# Last modified: 27 Apr 2014
 #
 # This file is part of Climate Analyser.
 #
@@ -32,6 +32,21 @@ import numpy
 # months: the number of months to generate data for.
 def generate1D(filename, start, months):
     cdf = Dataset(filename, 'w', format='NETCDF4')
+
+    time_dim = cdf.createDimension('time', months)
+
+    time_var = cdf.createVariable('time', 'f8', ('time', ))
+    random_var = cdf.createVariable('random', 'i4', ('time', ))
+
+    time_var.units = ' '.join(['days since ',
+                               '%04d-%02d-%02d' % start,
+                               ' 00:00:00.0'])
+    time_var.calendar = 'gregorian'
+
+    random_var.units = 'random values'
+
+    time_var[:] = monthlist(start, months)
+    random_var[:] = numpy.random.randint(-5,6,months)
 
     cdf.close()
     return
