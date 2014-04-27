@@ -1,5 +1,5 @@
 #
-# Date manipulation test suite.
+# One-dimensional netCDF sample file generator
 # Author:        Andrew Dunn
 # Last modified: 22 Apr 2014
 #
@@ -20,16 +20,18 @@
 # If not, see <http://www.gnu.org/licenses/>.
 #
 
-import unittest
+# This file requires the sample_data_generator directory to be in the python path
+from netCDF4 import Dataset
 from monthlist import monthlist
+import numpy
 
-class TestDateManipulation(unittest.TestCase):
+# Creates a 1D netCDF file with random data in the range of [-5, 5].
+# filename: The filename to save to.
+# start: a tuple in the format (year, month, date) which represents the first
+#        datapoint
+# months: the number of months to generate data for.
+def generate1D(filename, start, months):
+    cdf = Dataset(filename, 'w', format='NETCDF4')
 
-    def test_checkDayOffsetLists(self):
-        self.assertEqual(monthlist((2014, 1, 31), 1), [0])
-        self.assertEqual(monthlist((2014, 1, 31), 2), [0, 28])
-        self.assertEqual(monthlist((2014, 1, 31), 24), [
-              0,  28,  59,  89, 120, 150, 181, 212, 242, 273, 303, 334,
-            365, 393, 424, 454, 485, 515, 546, 577, 607, 638, 668, 699
-        ])
-        return;
+    cdf.close()
+    return

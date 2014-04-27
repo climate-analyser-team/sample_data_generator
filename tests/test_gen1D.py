@@ -1,7 +1,7 @@
 #
-# Date manipulation test suite.
+# 1D sample netCDF file generation test suite
 # Author:        Andrew Dunn
-# Last modified: 22 Apr 2014
+# Last modified: 17 Apr 2014
 #
 # This file is part of Climate Analyser.
 #
@@ -21,15 +21,23 @@
 #
 
 import unittest
-from monthlist import monthlist
+from netCDF4 import Dataset
+from generate1D import generate1D
 
-class TestDateManipulation(unittest.TestCase):
+class Test1DGeneration(unittest.TestCase):
 
-    def test_checkDayOffsetLists(self):
-        self.assertEqual(monthlist((2014, 1, 31), 1), [0])
-        self.assertEqual(monthlist((2014, 1, 31), 2), [0, 28])
-        self.assertEqual(monthlist((2014, 1, 31), 24), [
-              0,  28,  59,  89, 120, 150, 181, 212, 242, 273, 303, 334,
-            365, 393, 424, 454, 485, 515, 546, 577, 607, 638, 668, 699
+    def test_checkReadable(self):
+        filename = "sample_1D.nc"
+
+        generate1D(filename, (2014, 01, 31,), 12)
+        cdf = Dataset(filename, 'r', format='NETCDF4')
+
+        self.assertEqual(cdf.variables['time'][:].tolist(), [
+            0, 28, 59, 89, 120, 150, 181, 212, 242, 273, 303, 334
         ])
+
+        self.assertEqual(len(cdf.variables['random'][:]), 12)
+
+        cdf.close()
+
         return;
