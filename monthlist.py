@@ -50,3 +50,11 @@ def monthlist(start, months):
         output.append(delta.days)
 
     return output
+
+# generates the given number of latitudes between -90 to 90
+def latList(lats):
+    return range(-90, 91, 180 / lats)
+
+# generates the given number of longitudes between -180 to 180
+def lonList(lons):
+    return range(-180, 181, 360 / lons)
