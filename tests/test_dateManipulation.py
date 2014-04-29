@@ -22,6 +22,8 @@
 
 import unittest
 from monthlist import monthlist
+from monthlist import latList
+from monthlist import lonList
 
 class TestDateManipulation(unittest.TestCase):
 
@@ -33,3 +35,11 @@ class TestDateManipulation(unittest.TestCase):
             365, 393, 424, 454, 485, 515, 546, 577, 607, 638, 668, 699
         ])
         return;
+
+    def test_LatLonLists(self):
+        self.assertEqual(len(latList(18)), 18)
+        self.assertEqual(latList(19), [
+            -90.0, -80.0, -70.0, -60.0, -50.0, -40.0, -30.0, -20.0, -10.0, 0.0,
+             10.0,  20.0,  30.0,  40.0,  50.0,  60.0,  70.0,  80.0,  90.0])
+        self.assertEqual(len(lonList(500)), 500)
+        self.assertEqual(lonList(6), [-180.0, -120.0, -60.0, 0.0, 60.0, 120.0])
