@@ -25,6 +25,7 @@
 from datetime import date
 from datetime import timedelta
 from calendar import monthrange
+from numpy import arange
 
 # Adds the specified number of months to the given date and returns as a tuple.
 def addMonths(start, months):
@@ -53,8 +54,10 @@ def monthlist(start, months):
 
 # generates the given number of latitudes between -90 to 90
 def latList(lats):
-    return range(-90, 91, 180 / lats)
+    latsn = lats - 1
+    return arange(-90.0, 90.0 + (180.0 / latsn), 180.0 / latsn).tolist()
 
 # generates the given number of longitudes between -180 to 180
 def lonList(lons):
-    return range(-180, 181, 360 / lons)
+    lonsn = lons
+    return arange(-180.0, 180.0, 360.0 / lonsn).tolist()

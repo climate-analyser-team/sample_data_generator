@@ -29,17 +29,18 @@ class Test2DGeneration(unittest.TestCase):
 	def test_checkReadable(self):
 		filename = "sample_2D.nc"
 
-		generate2D(filename, (2014, 01, 31,), 12, 6, 12)
+		generate2D(filename, (2014, 01, 31,), 12, 7, 12)
 		cdf = Dataset(filename, 'r', format='NETCDF4')
 
 		self.assertEqual(cdf.variables['lat'][:].tolist(), [
 			-90, -60, -30, 0, 30, 60, 90
 		])
-		self.assertEqual(cdf.variables['lat'][:].tolist(), [
-			-180, -150, -120, -90, -60, -30, 0, 30, 60, 90, 120, 150, 180
+		self.assertEqual(cdf.variables['lon'][:].tolist(), [
+			-180.0, -150.0, -120.0, -90.0, -60.0, -30.0, 0.0, 30.0, 60.0, 90.0,
+			 120.0, 150.0
 		])
 
-		#self.assertEqual(len(cdf.variables['random'][:]), 12)
+		self.assertEqual((cdf.variables['random'][:]).size, 12 * 7 * 12)
 
 		cdf.close()
 
